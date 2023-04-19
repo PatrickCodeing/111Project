@@ -22,3 +22,18 @@ classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models
 function Loaded(){
 console.log('model has been loaded');
 }
+
+function check(){
+    img = document.getElementById("captured_image");
+    classifier.classify(img, gotResult);
+}
+
+function gotResult(error, results){
+    if(error){
+        console.error(error);
+    }else{
+        console.log(results);
+        document.getElementById("people_name").innerHTML = results[0].label;
+        document.getElementById("people_accuracy").innerHTML = results[0].confidence.toFixed(3);
+        }
+}
